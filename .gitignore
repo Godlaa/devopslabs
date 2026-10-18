@@ -1,0 +1,33 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+.ssh/
+.vault_pass
+.vault_pass.*
+.vault-password
+.vault-password.*
+
+# Local Ansible inventory and generated files
+lab04/inventory.local.*
+*.retry
+
+# Temporary files and local artifacts
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+.cache/
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
