@@ -16,16 +16,25 @@ devopslabs/
 ├── .github/workflows/
 │   ├── devops_course_pipeline.yml
 │   └── lint.yml
-├── videos/
-│   ├── lab02/01-compose-nginx.webm
-│   ├── lab03/01-worker-cron.webm
-│   ├── lab04/01-ansible-nginx.webm
-│   ├── lab05/01-nmap.webm
-│   ├── lab07-1/01-nginx-role.webm
-│   └── lab07-2/01-github-actions.webm
+├── presentations/            # Видеопрезентации лабораторных
+│   ├── lab02-03/Lab2-3.webp
+│   ├── lab04-05-07-1/lab4-7.webp
+│   └── lab07-2/lab7.webp
 ├── requirements-ci.txt
 └── README.md
 ```
+
+## Видеопрезентации
+
+Лабораторные 2–3 и 4–5–7.1 объединены в общие записи. Формат — анимированный WebP.
+
+| Лабораторная | Материалы | Запись |
+| --- | --- | --- |
+| 2–3 | [Docker Compose и cron](lab02-03/) | [2–3](presentations/lab02-03/Lab2-3.webp) |
+| 4 | [Nginx через Ansible](lab04/) | [4–5–7.1](presentations/lab04-05-07-1/lab4-7.webp) |
+| 5 | [Переменные и Nmap](lab05-nmap/) | [4–5–7.1](presentations/lab04-05-07-1/lab4-7.webp) |
+| 7.1 | [Роль Nginx](lab07-nginx-role/) | [4–5–7.1](presentations/lab04-05-07-1/lab4-7.webp) |
+| 7.2 | [GitHub Actions](.github/workflows/) | [7.2](presentations/lab07-2/lab7.webp) |
 
 ## Лабораторные 2–3: Docker Compose
 
