@@ -1,0 +1,14 @@
+---
+- name: Настроить сайты Nginx
+  hosts: web
+  become: true
+  gather_facts: false
+
+  vars:
+    sites:
+      - mehmat.ru
+      - fizfak.ru
+      - etis.com
+
+  roles:
+    - nginx_vhosts

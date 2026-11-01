@@ -1,0 +1,40 @@
+---
+name: Ansible lint and syntax
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install Ansible tooling
+        run: python -m pip install -r requirements-ci.txt
+      - name: Lint new Ansible labs
+        run: >-
+          ansible-lint --strict
+          lab05-nmap/playbook.yml
+          lab07-nginx-role/playbook.yml
+          lab07-nginx-role/roles/nginx_vhosts
+      - name: Check Nmap playbook syntax
+        run: >-
+          ansible-playbook -i lab05-nmap/inventory.ini
+          lab05-nmap/playbook.yml --syntax-check
+      - name: Check Nginx role playbook syntax
+        run: >-
+          ansible-playbook -i lab07-nginx-role/inventory.ini
+          lab07-nginx-role/playbook.yml --syntax-check

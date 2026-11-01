@@ -1,0 +1,35 @@
+---
+- name: Проверка HTTP-порта через Nmap
+  hosts: scanners
+  gather_facts: false
+
+  vars:
+    nmap_targets: >-
+      {{ lookup('ansible.builtin.file', playbook_dir ~ '/targets.txt').splitlines()
+         | map('trim') | reject('match', '^($|#)') | list }}
+
+  tasks:
+    - name: Установить Nmap
+      ansible.builtin.apt:
+        name: nmap
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+      become: true
+
+    - name: Просканировать порт 80
+      ansible.builtin.command: nmap -sT -Pn -n -p 80 --host-timeout 15s {{ item | quote }}
+      loop: "{{ nmap_targets }}"
+      register: nmap_scan_results
+      changed_when: false
+
+    - name: Показать результат сканирования
+      ansible.builtin.debug:
+        msg:
+          target: "{{ item.item }}"
+          rc: "{{ item.rc }}"
+          output: "{{ item.stdout_lines }}"
+      loop: "{{ nmap_scan_results.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+      when: not ansible_check_mode
