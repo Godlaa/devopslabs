@@ -1,0 +1,39 @@
+---
+- name: Установить Nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Создать каталоги сайтов
+  ansible.builtin.file:
+    path: "{{ nginx_vhosts_root }}/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ sites }}"
+
+- name: Создать страницы сайтов
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ nginx_vhosts_root }}/{{ item }}/index.html"
+    mode: "0644"
+  loop: "{{ sites }}"
+
+- name: Создать конфигурации сайтов
+  ansible.builtin.template:
+    src: vhost.conf.j2
+    dest: "/etc/nginx/conf.d/ansible-vhost-{{ item }}.conf"
+    mode: "0644"
+  loop: "{{ sites }}"
+  notify: Перезагрузить Nginx
+
+- name: Проверить конфигурацию Nginx
+  ansible.builtin.command: nginx -t
+  changed_when: false
+
+- name: Включить и запустить Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

@@ -1,0 +1,12 @@
+# Управляется Ansible
+server {
+    listen {{ nginx_vhosts_listen_port }};
+    server_name {{ item }};
+
+    root {{ nginx_vhosts_root }}/{{ item }};
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

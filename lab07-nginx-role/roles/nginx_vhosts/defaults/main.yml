@@ -1,0 +1,3 @@
+---
+nginx_vhosts_listen_port: 8080
+nginx_vhosts_root: /var/www/ansible-vhosts

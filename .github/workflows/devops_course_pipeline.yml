@@ -1,0 +1,21 @@
+---
+name: DevOps course pipeline
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  runner-commands:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Print a greeting
+        run: echo 'Hello from the DevOps course pipeline!'
+      - name: Show uptime
+        run: uptime
+      - name: Show working directory
+        run: pwd
+      - name: Show current user
+        run: whoami

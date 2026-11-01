@@ -1,4 +1,4 @@
-# Local environment and credentials
+# Локальное окружение и учётные данные
 .env
 .env.*
 !.env.example
@@ -13,11 +13,14 @@ id_ed25519
 .vault-password
 .vault-password.*
 
-# Local Ansible inventory and generated files
+# Локальные файлы inventory Ansible и сгенерированные файлы
 lab04/inventory.local.*
+lab05-nmap/inventory.local.*
+lab07-nginx-role/inventory.local.*
+lab05-nmap/targets.local.txt
 *.retry
 
-# Temporary files and local artifacts
+# Временные файлы и локальные артефакты
 *.log
 *.tmp
 *.swp
